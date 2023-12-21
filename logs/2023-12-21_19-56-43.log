@@ -1,0 +1,6 @@
+2023-12-21 19:56:43 | This message will be logged.
+2023-12-21 19:56:43 | This message have multiple lines
+    This is the second line
+    This is the third line
+2023-12-21 19:56:43 | [WARNING]: [Document()] object Cannot be serialized, raw print instead
+2023-12-21 19:56:43 | [Document()] Content : [page_content='This is the raw text content of the document' lookup_str='' metadata={'source': 'http://example.com/document.txt'} lookup_index=0]
