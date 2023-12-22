@@ -59,7 +59,7 @@ class AdvancedLogger:
 # ============================================================================= #
 
     def write(self, message):
-        # Manage the `print(end="")` case (call another write for just write the end)
+        # Manage the `print(end : str ="\n")` because its call another write for just write the end)
         if message == '\n':
             return
 
@@ -109,7 +109,7 @@ class AdvancedLogger:
     def logging_context(self):
         try:
             self.start_logging()
-            yield
+            yield self  # Yielding 'self' return the logger instance
         except Exception as e:
             error_message = f"[CRASH]: {e}\n\n{traceback.format_exc()}"
             self.write(error_message)
