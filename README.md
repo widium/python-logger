@@ -1,5 +1,5 @@
 ## Overview
-`MyLogger` is a customizable logging utility for Python applications. It simplifies the process of logging messages to both the console and a file, with the added capability of including extra data in log messages. This utility is ideal for tracking application behavior, debugging, and maintaining records of operations with precise timestamps.
+`RootLogger` is a customizable logging utility for Python applications. It provides an easy way to log messages both to the console and to a file, with support for adding extra data to log messages. This utility is particularly useful for tracking application behavior, debugging, and keeping records of operations with timestamps.
 
 ## Features
 - Customizable log level and output folder.
@@ -12,9 +12,11 @@
 ### 1. Basic Setup and Logging
 **Code:**
 ```python
-from my_logger import MyLogger
+from root import RootLogger
+import logging
 
-logger = MyLogger(name=__name__, level=logging.INFO, logs_folder="./logs/")
+RootLogger(level="INFO", logs_folder="./logs/")
+logger = logging.getLogger()
 
 logger.info("This is a basic info message")
 ```
@@ -24,7 +26,8 @@ Specify different logging levels (DEBUG, INFO, WARNING, ERROR, CRITICAL).
 
 **Code:**
 ```python
-logger = MyLogger(name=__name__, level=logging.DEBUG)
+RootLogger(level="DEBUG")
+logger = logging.getLogger()
 
 logger.debug("This is a debug message")
 ```
@@ -68,8 +71,8 @@ logger.info("Logging with extra data", extra=data)
 [2024-01-29 14:21:01 | INFO | __main__:<module>:6 | Thread: MainThread] :  Logging with extra data | Extra Data: custom_value
 ```
 
-### 5. Using `MyLogger` in Another File
-Integrate `MyLogger` into various modules of your application for consistent logging.
+### 5. Using `RootLogger` in Another File
+Easily integrate `RootLogger` into different modules of your application.
 
 **func.py:**
 ```python
@@ -83,10 +86,10 @@ def some_func():
 
 **main.py:**
 ```python
-from my_logger import MyLogger
+from root import RootLogger
 from func import some_func
 
-logger = MyLogger(__name__)
+RootLogger()
 some_func()
 ```
 

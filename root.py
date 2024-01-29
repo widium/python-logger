@@ -62,16 +62,18 @@ from pathlib import Path
 
 class CustomFormatter(logging.Formatter):
     def __init__(self):
-        fmt = "[%(asctime)s | %(levelname)s | %(module)s:%(funcName)s:%(lineno)s | Thread: %(threadName)s | Extra Data: %(x)s] : %(message)s"
+        fmt = "[%(asctime)s | %(levelname)s | %(module)s:%(funcName)s:%(lineno)s | Thread: %(threadName)s] : %(message)s | Extra Data: %(x)s"
         super().__init__(fmt)
 
     def format(self, record):
         record.x = record.__dict__.get('x', 'N/A')
         return super(CustomFormatter, self).format(record)
 
-class MyLogger(logging.Logger):
-    def __init__(self, name, level=logging.INFO, logs_folder="./logs/"):
-        super().__init__(name, level)
+class RootLogger:
+    def __init__(self, level: str = "INFO", logs_folder: str = "./logs/"):
+        self.logs_folder = logs_folder
+        self.level = level
+        self.setup_root_logger()
 
         # Ensure logs folder exists
         logs_folder_path = Path(logs_folder)
