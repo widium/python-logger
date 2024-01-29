@@ -1,106 +1,99 @@
-# AdvancedLogger: Custom Logging Tool for Python
-
 ## Overview
-AdvancedLogger is a custom Python logger designed to streamline logging in your Python projects. It captures stdout, logs objects, and gracefully handles exceptions. It's easy to integrate and use in various scenarios.
-
-## Installation
-Copy the `logger.py` file containing the `AdvancedLogger` class into your project directory.
-
-## Basic Usage
-Import `AdvancedLogger` and use it within a `with` statement to start logging:
-
-```python
-from logger import AdvancedLogger
-
-logger = AdvancedLogger(log_directory="logs")
-
-with logger.logging_context():
-    print("Your log message here")
-```
+`MyLogger` is a customizable logging utility for Python applications. It provides an easy way to log messages both to the console and to a file, with support for adding extra data to log messages. This utility is particularly useful for tracking application behavior, debugging, and keeping records of operations with timestamps.
 
 ## Features
+- Customizable log level and output folder.
+- Logging to both console and file.
+- Support for extra data in log messages.
+- Easy integration into Python scripts and modules.
 
-### Standard Logging
-Logs standard messages with timestamps:
+## Usage
 
+### 1. Basic Setup and Logging
+**Code:**
 ```python
-from logger import AdvancedLogger
+from root import MyLogger
+import logging
 
-logger = AdvancedLogger(log_directory="logs")
+MyLogger(level="INFO", logs_folder="./logs/")
+logger = logging.getLogger()
 
-with logger.logging_context():
-    print("This message will be logged.")
+logger.info("This is a basic info message")
 ```
+
+### 2. Changing Log Level
+You can specify different logging levels (DEBUG, INFO, WARNING, ERROR, CRITICAL).
+
+**Code:**
+```python
+logger_manager = MyLogger(level="DEBUG")
+logger = logging.getLogger()
+
+logger.debug("This is a debug message")
+```
+
 **Output:**
 ```
-2023-12-22 10:45:01 | This message will be logged.
+Created logs folder [logs]
+[2024-01-29 14:18:10 | DEBUG | root:<module>:6 | Thread: MainThread] :  This is a debug message | Extra Data: N/A
 ```
 
-### Multi-Line Logging
-Handles multi-line messages, indenting subsequent lines for readability:
+### 3. Logging Exceptions
+Log exceptions in your code with stack trace.
 
+**Code:**
 ```python
-with logger.logging_context():
-    print("This message has multiple lines\nThis is the second line\nThis is the third line")
+try:
+    raise ValueError("Example exception")
+except Exception as e:
+    logger.exception("An error occurred")
 ```
+
 **Output:**
 ```
-2023-12-22 10:45:01 | This message has multiple lines
-    This is the second line
-    This is the third line
+[2024-01-29 14:19:30 | ERROR | root:<module>:5 | Thread: MainThread] :  An error occurred | Extra Data: N/A
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+ValueError: Example exception
 ```
 
-### Logging Objects
-Log complex objects with `log_object()`. Note: Must be used within the logging context:
+### 4. Logging with Extra Data
+You can log additional data using the `extra` parameter.
 
+**Code:**
 ```python
-from logger import AdvancedLogger
-from your_module import YourObject
-
-def some_function():
-    obj = YourObject()
-    AdvancedLogger.log_object(obj)
-
-with logger.logging_context():
-    some_function()
+data = {"x": "custom_value"}
+logger.info("Logging with extra data", extra=data)
 ```
+
 **Output:**
 ```
-2023-12-22 10:45:01 | [YourObject] Content: ...
+[2024-01-29 14:21:01 | INFO | root:<module>:6 | Thread: MainThread] :  Logging with extra data | Extra Data: custom_value
 ```
 
-### Exception Handling
-Automatically logs exceptions occurring within the logging context:
+### 5. Using `MyLogger` in Another File
+Easily integrate `MyLogger` into different modules of your application.
 
+**func.py:**
 ```python
-with logger.logging_context():
-    raise Exception("This is an exception")
+import logging
+
+def some_func():
+    logger = logging.getLogger()
+    logger.info("This is from some_func")
 ```
+
+**main.py:**
+```python
+from root import MyLogger
+from func import some_func
+
+logger_manager = MyLogger()
+some_func()
+```
+
 **Output:**
 ```
-2023-12-22 10:49:45 | This message will be logged.
-2023-12-22 10:49:45 | [CRASH]: This is an exception
-    
-    Traceback (most recent call last):
-      ...
+Created logs folder [logs]
+[2024-01-29 14:23:10 | INFO | func:some_func:4 | Thread: MainThread] :  This is from some_func | Extra Data: N/A
 ```
-
-### Accessing Log File Name
-Retrieve the log file name within the logging context:
-
-```python
-with logger.logging_context() as tracker:
-    print("This message will be logged.")
-print(tracker.log_path)
-```
-**Output:**
-```
-2023-12-22 10:53:46 | This message will be logged.
-...
-logs/2023-12-22_10-53-46.log
-```
-
-## Best Practices
-- Always use `AdvancedLogger` within a `with` statement for proper start and stop of logging.
-- Use `AdvancedLogger.log_object()` to log complex objects. Ensure it's within the logging context.
-- Check `tracker.log_path` for the log file name and path.
