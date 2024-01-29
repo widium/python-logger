@@ -4,13 +4,11 @@ import logging
 from func import some_func
 
 if __name__ == "__main__":
-    logger_manager = MyLogger(
-        level="INFO",
+    logger = MyLogger(
+        name=__name__,
+        level=logging.INFO,
         logs_folder="./logs/",
     )
-    
-    # logger = logger_manager.get_logger(__name__)
-    logger = logging.getLogger()
     
     data = {"x": [
             {"y" : "custom_value"},

@@ -1,6 +1,5 @@
-import logging
-
-logger = logging.getLogger()
+from root import MyLogger
+logger = MyLogger(name=__name__)
 
 def some_func():
     try:
