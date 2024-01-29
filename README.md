@@ -1,5 +1,5 @@
 ## Overview
-`MyLogger` is a customizable logging utility for Python applications. It provides an easy way to log messages both to the console and to a file, with support for adding extra data to log messages. This utility is particularly useful for tracking application behavior, debugging, and keeping records of operations with timestamps.
+`RootLogger` is a customizable logging utility for Python applications. It provides an easy way to log messages both to the console and to a file, with support for adding extra data to log messages. This utility is particularly useful for tracking application behavior, debugging, and keeping records of operations with timestamps.
 
 ## Features
 - Customizable log level and output folder.
@@ -12,10 +12,10 @@
 ### 1. Basic Setup and Logging
 **Code:**
 ```python
-from root import MyLogger
+from root import RootLogger
 import logging
 
-MyLogger(level="INFO", logs_folder="./logs/")
+RootLogger(level="INFO", logs_folder="./logs/")
 logger = logging.getLogger()
 
 logger.info("This is a basic info message")
@@ -26,7 +26,7 @@ You can specify different logging levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 
 **Code:**
 ```python
-logger_manager = MyLogger(level="DEBUG")
+RootLogger(level="DEBUG")
 logger = logging.getLogger()
 
 logger.debug("This is a debug message")
@@ -71,8 +71,8 @@ logger.info("Logging with extra data", extra=data)
 [2024-01-29 14:21:01 | INFO | root:<module>:6 | Thread: MainThread] :  Logging with extra data | Extra Data: custom_value
 ```
 
-### 5. Using `MyLogger` in Another File
-Easily integrate `MyLogger` into different modules of your application.
+### 5. Using `RootLogger` in Another File
+Easily integrate `RootLogger` into different modules of your application.
 
 **func.py:**
 ```python
@@ -85,10 +85,10 @@ def some_func():
 
 **main.py:**
 ```python
-from root import MyLogger
+from root import RootLogger
 from func import some_func
 
-logger_manager = MyLogger()
+RootLogger()
 some_func()
 ```
 

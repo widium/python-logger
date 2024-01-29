@@ -1,0 +1,8 @@
+[2024-01-29 16:03:47,089 | INFO | main:<module>:23 | Thread: MainThread] : This is an info message | Extra Data: [{'y': 'custom_value'}, {'t': 'custom_value'}, {'i': 'custom_value'}, {'a': 'custom_value'}, {'p': 'custom_value'}]
+[2024-01-29 16:03:47,089 | INFO | func:some_func:7 | Thread: MainThread] : This is a message at the start of some_func | Extra Data: N/A
+[2024-01-29 16:03:47,089 | ERROR | func:some_func:12 | Thread: MainThread] : An error occurred in some_func | Extra Data: N/A
+Traceback (most recent call last):
+  File "/home/widium/Programming/Assets/logger/func.py", line 8, in some_func
+    raise ValueError("Example exception")
+ValueError: Example exception
+[2024-01-29 16:03:47,090 | INFO | main:<module>:25 | Thread: MainThread] : End of program | Extra Data: N/A

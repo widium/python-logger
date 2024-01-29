@@ -1,10 +1,10 @@
-from root import MyLogger
+from root import RootLogger
 import logging
 
 from func import some_func
 
 if __name__ == "__main__":
-    logger_manager = MyLogger(
+    RootLogger(
         level="INFO",
         logs_folder="./logs/",
     )

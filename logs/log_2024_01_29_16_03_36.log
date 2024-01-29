@@ -1,0 +1,2 @@
+[2024-01-29 16:03:36,124 | INFO | main:<module>:23 | Thread: MainThread] : This is an info message | Extra Data: [{'y': 'custom_value'}, {'t': 'custom_value'}, {'i': 'custom_value'}, {'a': 'custom_value'}, {'p': 'custom_value'}]
+[2024-01-29 16:03:36,124 | INFO | main:<module>:25 | Thread: MainThread] : End of program | Extra Data: N/A
