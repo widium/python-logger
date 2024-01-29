@@ -9,6 +9,8 @@ if __name__ == "__main__":
         logs_folder="./logs/",
     )
     
+    logger = logging.getLogger()
+        
     data = {"x": [
             {"y" : "custom_value"},
             {"t" : "custom_value"},
